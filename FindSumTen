@@ -1,0 +1,105 @@
+//get array from user input and find two numbers that sum is 10.
+package com.company;
+
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+/**
+ * Created by xuanli on 2017-04-26.
+ */
+public class SumTen {
+    public ArrayList<Integer> a;
+    public Hashtable hashNew;
+    public int target;
+
+    public SumTen() {
+        hashNew = new Hashtable();
+        a=new ArrayList<>();
+        target = 10;
+    }
+
+
+    public void insert(int newNumber) {
+        a.add(newNumber);
+    }
+
+    public String showNumbers() {
+        return a.toString();
+    }
+
+    public String twoSum() {
+         String pairs = "";
+        for (int i = 0; i < a.size(); i++) {
+            hashNew.put(a.get(i), i);
+        }
+
+
+        for (int i = 0; i < a.size(); i++) {
+            if (hashNew.containsKey(target - a.get(i))) {
+             pairs += ("("+ (target - a.get(i))+"," + a.get(i)+"), ");
+                hashNew.remove((a.get(i)));
+            }
+        }
+         return pairs;
+    }
+
+}
+
+package com.company;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        int option = -1;
+        SumTen ten=new SumTen();
+
+        do {
+            System.out.println("1 to add number from keyboard , "
+                    +  "2 to show numbers, "
+                    + "3 to display sum of 10 , 4 to quit ");
+            System.out.println("Please enter menu option :");
+
+            while (!input.hasNextInt()) {
+                System.out.println("Invalid Account number. Please enter only digits:");
+                input.next();
+            }
+            option = input.nextInt();
+            switch (option) {
+
+                case 1:
+                    System.out.println("please input the number :");
+                    int newNumber = input.nextInt();
+                    ten.insert(newNumber);
+                    System.out.println(newNumber + " has been added");
+                    break;
+                case 2:
+                    System.out.println("Numbers in the list:");
+
+                    System.out.println(ten.showNumbers() + " are in the list");
+                    break;
+                case 3:
+                    System.out.println("There are pairs of numbers that sum as 10 :");
+
+                    System.out.println(ten.twoSum());
+                    break;
+
+                case 4:
+                    System.out.println("Thanks for USING");
+                    System.out.println("program ending...");
+                    break;
+                default:
+                    System.out.println("Invalid menu option");
+            }
+        } while (option != 4);
+    }
+}
+
+
+
+
+

@@ -1,0 +1,11 @@
+public int reverse(int x){
+       int newInt=0;
+       while(x!=0){
+        newInt=newInt*10+x%10;  ## x%10 to get the tail number
+        x=x/10 ;  ## to remove the tail number
+        if(newInt>Integer.MAX_VALUE || newInt<Integer.MIN_VALUE){
+        return 0;
+        }
+       }
+       return newInt;
+}

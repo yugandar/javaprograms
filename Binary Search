@@ -1,0 +1,32 @@
+## find number that in a sorted array consisting of only integers where every element appears twice except for one element which appears once.Using Binary Search
+
+
+public class Solution {
+    public int singleNonDuplicate(int[] nums) {
+        
+        int low =0;
+        int high = nums.length -1;
+        int mid;
+        boolean left;
+        boolean leftOne=true;
+        boolean leftTwo=true;
+
+        while(low<high)
+        {
+            mid = low + (high-low)/2;
+        
+            if(nums[mid]!=nums[mid-1] && nums[mid]!=nums[mid+1])
+            return nums[mid];
+             
+         leftOne = ((nums[mid]== nums[mid-1]) && (mid)%2==0); 
+         leftTwo = ((nums[mid] == nums[mid+1]) && (mid)%2==1);
+           
+            left = leftOne||leftTwo; 
+            if(left)
+                high = mid-1;
+            else
+                low = mid+1;
+        }
+        return nums[low];
+    }
+}

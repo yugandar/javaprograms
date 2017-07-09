@@ -1,0 +1,36 @@
+Thread dump is list of all the threads active in the JVM, thread dumps are very helpful in analyzing bottlenecks in the application and analyzing deadlock situations. 
+There are many ways using which we can generate Thread dump – Using VisualVM Profiler, Kill -3 command, jstack tool etc.
+
+Here is an example that start VisualVM Profiler:
+1 Open java application and right click.
+2 Open the Thread Dump version
+
+Here is an example that using jstack tool:
+ 1> ps -eaf | grep java 
+  501  8663  8564   0  9:10am ??         0:00.19 /Library/JavaHome/bin/java -Dfile.encoding=UTF-8 -classpath /User/Assgn2/bin server.EchoServer
+  501  8665  8564   0  9:10am ??         0:00.19 /Library/java -Dfile.encoding=UTF-8 -classpath /Users/Assgn2/bin client.EchoClient
+  501  8667  8651   0  9:10am ttys000    0:00.00 grep java
+2>jstack 8564 
+VM Thread" os_prio=31 tid=0x0000000102820000 nid=0x6003 runnable 
+
+"GC task thread#0 (ParallelGC)" os_prio=31 tid=0x000000010280a000 nid=0x5803 runnable 
+
+"GC task thread#1 (ParallelGC)" os_prio=31 tid=0x0000000102026000 nid=0x5a03 runnable 
+
+"GC task thread#2 (ParallelGC)" os_prio=31 tid=0x0000000102819000 nid=0x5c03 runnable 
+
+"GC task thread#3 (ParallelGC)" os_prio=31 tid=0x0000000102819800 nid=0x5e03 runnable 
+
+"VM Periodic Task Thread" os_prio=31 tid=0x0000000102048800 nid=0x7203 waiting on condition 
+
+JNI global references: 1902
+
+Information show as below:
+
+Thread Name: Name of the Thread
+Thread Priority: Priority of the thread
+Thread ID: Represents ID of the Thread
+Thread Status: Provides the current thread state, for example RUNNABLE, WAITING, BLOCKED. 
+Thread callstack: Provides the vital stack information for the thread. This we can see one thread is waiting for a lock
+
+

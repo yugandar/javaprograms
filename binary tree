@@ -1,0 +1,39 @@
+
+Given a binary tree, returnlevel order traversal of its nodes' values.
+
+public class TreeNode {
+    int val;
+    TreeNode left;
+    TreeNode right;
+    TreeNode(int x) { val = x; }
+  }
+
+
+
+
+public class Solution {
+    public List<List<Integer>> levelOrder(TreeNode root) 
+    {
+        List<List<Integer>> arrayNew = new ArrayList<>();
+        travel(root, arrayNew, 0);
+        return arrayNew;
+    }
+    
+    private void travel(TreeNode current, List<List<Integer>> arrayNew, int level)
+    {
+        if(current == null) return;
+        
+        if(arrayNew.size() <= level)
+        {
+            List<Integer> newLevel = new LinkedList<>();
+            arrayNew.add(newLevel);
+        }
+        
+        List<Integer> collection  = arrayNew.get(level);
+        if(level % 2 == 0) collection.add(current.val);
+        else collection.add(0, current.val);
+        
+        travel(current.left, arrayNew, level + 1);
+        travel(current.right, arrayNew, level + 1);
+    }
+}
